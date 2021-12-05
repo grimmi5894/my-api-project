@@ -1,0 +1,32 @@
+{
+  "name": "my-api-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "npm run lint:pug && npm run lint:eslint",
+    "lint:pug": "./node_modules/.bin/pug-lint .",
+    "lint:eslint": "./node_modules/.bin/eslint --format codeframe ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grimmi5894/my-api-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/grimmi5894/my-api-project/issues"
+  },
+  "homepage": "https://github.com/grimmi5894/my-api-project#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pug": "^3.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.4.0",
+    "nodemon": "^2.0.15",
+    "pug-lint": "^2.6.0"
+  }
+}
