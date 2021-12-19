@@ -2,7 +2,7 @@ html
   include partials/head
   body 
     h1 Video Game - API
-      h2 Get Requests 
+      h2.get GET Requests 
         ul 
           li / - Displays this documentation
           li /games - Shows all games 
@@ -10,7 +10,7 @@ html
           li /games/:system - Displays games with matching system  
           li /games/:genre - Displays games with matching genre
           li /games/:multiplayer - Displays games with multiplayer true
-      h2 Post Requests
+      h2.post POST Requests
         p /games - Adds a new game to the API with the following inputs: 
           ul 
             li title - string, required
@@ -19,8 +19,7 @@ html
             li yearReleased - INT, required 
             li multiplayer - boolean, required
             li description - string, not required
-      h2 Patch Requests
+      h2.patch PATCH Requests
         p /games - Updates game information in API 
-      h2 Delete Requests 
+      h2.delete DELETE Requests 
         p /games - Deletes games information in API 
-        
