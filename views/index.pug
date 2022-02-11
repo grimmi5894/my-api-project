@@ -9,16 +9,14 @@ html
           li /games/:title - Displays game or games with matching title 
           li /games/:system - Displays games with matching system  
           li /games/:genre - Displays games with matching genre
-          li /games/:multiplayer - Displays games with multiplayer true
       h2.post POST Requests
         p /games - Adds a new game to the API with the following inputs: 
           ul 
             li title - string, required
-            li system - string, required 
+            li gameSystem - string, required 
             li genre - string, required 
             li yearReleased - INT, required 
-            li multiplayer - boolean, required
-            li description - string, not required
+            li multiplayer - string, not required
       h2.patch PATCH Requests
         p /games - Updates game information in API 
       h2.delete DELETE Requests 

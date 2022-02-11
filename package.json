@@ -5,10 +5,12 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
+    "dev:migrate": "env-cmd sequelize db:migrate --env development --config ./configs/sequelize.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npm run lint:pug && npm run lint:eslint",
     "lint:pug": "./node_modules/.bin/pug-lint .",
-    "lint:eslint": "./node_modules/.bin/eslint --format codeframe ."
+    "lint:eslint": "./node_modules/.bin/eslint --format codeframe .",
+    "lint:fix": "./node_modules/.bin/eslint --fix --format codeframe ."
   },
   "repository": {
     "type": "git",
