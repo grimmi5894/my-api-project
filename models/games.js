@@ -1,4 +1,6 @@
-const games = (connection, Sequelize, systems) => {
+const systems = require('./systems')
+
+const games = (connection, Sequelize) => {
   return connection.define('games', {
     id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
     title: { type: Sequelize.STRING, allowNull: false },
