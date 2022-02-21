@@ -9,6 +9,9 @@ USE videogames;
 CREATE TABLE systems (
   id INT auto_increment,
   gameSystem VARCHAR(255), NOT NULL,
+  createdAt DATETIME DEFAULT NOW(),
+  updatedAt DATETIME DEFAULT NOW() ON UPDATE NOW(),
+  deletedAt DATETIME,
   PRIMARY KEY(id),
 );
 
@@ -19,6 +22,9 @@ CREATE TABLE games (
   genre VARCHAR(255) NOT NULL,
   yearReleased INT, NOT NULL,
   multiplayer VARCHAR(255) NOT NULL,
+  createdAt DATETIME DEFAULT NOW(),
+  updatedAt DATETIME DEFAULT NOW() ON UPDATE NOW(),
+  deletedAt DATETIME,
   PRIMARY KEY(id),
   FOREIGN KEY(gameSystemId) REFERENCES systems(id)
 );
