@@ -81,5 +81,32 @@ describe('Controllers-Games', () => {
       expect(stubbedSend).to.have.been.calledWith(mockGame)
     })
   })
-  describe('saveNewGame', () => {})
+  describe('saveNewGame', () => {
+    it('creates new game in db with data provided and returns 200 status and JSON for new record', async () => {
+      stubbedCreate.returns(mockPostGameResponse)
+      const request = { body: mockPostGameData }
+
+      await saveNewGame(request, response)
+
+      expect(stubbedCreate).to.have.been.calledWith(mockPostGameData)
+      expect(stubbedStatus).to.have.been.calledWith(201)
+      expect(stubbedStatusDotSend).to.have.been.calledWith(mockPostGameResponse)
+    })
+    it('responds with 400 status and error message when not all required parameters are met', async () => {
+      const request = {
+        body: {
+          title: mockPostGameData.title,
+          genre: mockPostGameData.genre,
+          multiplayer: mockPostGameData.multiplayer
+        }
+      }
+
+      await saveNewGame(request, response)
+
+      expect(stubbedCreate).to.have.callCount(0)
+      expect(stubbedStatus).to.have.been.calledWith(400)
+      // eslint-disable-next-line max-len
+      expect(stubbedStatusDotSend).to.have.been.calledWith('All fields are required: title, genre, yearReleased, multiplayer, systemId')
+    })
+  })
 })
