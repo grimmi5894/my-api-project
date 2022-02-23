@@ -1,7 +1,9 @@
 const models = require('../models')
 
 const getAllGames = async (request, response) => {
-  const games = await models.Games.findAll()
+  const games = await models.Games.findAll({
+    include: [{ model: models.Systems }]
+  })
 
   return response.send(games)
 }
@@ -9,13 +11,15 @@ const getAllGames = async (request, response) => {
 const getGameByIdentifier = async (request, response) => {
   const { identifier } = request.params
 
-  const game = await models.Games.findOne({
+  const game = await models.Games.findAll({
     where: {
       [models.Op.or]: [
         { id: { [models.Op.like]: `%${identifier}%` } },
         { title: { [models.Op.like]: `%${identifier}%` } },
-        { genre: { [models.Op.like]: `%${identifier}%` } }]
-    }
+        { genre: { [models.Op.like]: `%${identifier}%` } },
+        { systemId: { [models.Op.like]: `%${identifier}%` } }]
+    },
+    include: [{ model: models.Systems }]
   })
 
   return game
