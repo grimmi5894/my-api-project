@@ -5,18 +5,18 @@ html
       h2.get GET Requests 
         ul 
           li / - Displays this documentation
+          li /systems - Shows all game systems
           li /games - Shows all games 
           li /games/:title - Displays game or games with matching title 
-          li /games/:system - Displays games with matching system  
           li /games/:genre - Displays games with matching genre
       h2.post POST Requests
         p /games - Adds a new game to the API with the following inputs: 
           ul 
-            li title - string, required
-            li gameSystem - string, required 
+            li title - string, required 
             li genre - string, required 
             li yearReleased - INT, required 
             li multiplayer - string, required
+            li systemId - INT, required
       h2.patch PATCH Requests
         p /games - Updates game information in API 
       h2.delete DELETE Requests 

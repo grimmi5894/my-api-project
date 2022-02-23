@@ -19,11 +19,7 @@ app.get('/games', getAllGames)
 
 app.get('/games/:identifier', getGameByIdentifier)
 
-app.get('games/:system', () => {})
-
-app.use(bodyParser.json())
-
-app.post('/games', () => {})
+app.post('/games', bodyParser.json(), () => {})
 
 app.all('*', (request, response) => {
   return response.sendStatus(404)
