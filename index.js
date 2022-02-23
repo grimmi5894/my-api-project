@@ -1,6 +1,8 @@
 /* eslint-disable no-console */
 const express = require('express')
 const bodyParser = require('body-parser')
+const { getAllGames, getGameByIdentifier } = require('./controllers/games')
+const getAllSystems = require('./controllers/systems')
 
 const app = express()
 
@@ -11,9 +13,11 @@ app.get('/', (request, response) => {
   return response.render('index')
 })
 
-app.get('/games', () => {})
+app.get('/systems', getAllSystems)
 
-app.get('/games:title', () => {})
+app.get('/games', getAllGames)
+
+app.get('/games/:identifier', getGameByIdentifier)
 
 app.get('games/:system', () => {})
 

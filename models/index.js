@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
-const gamesModel = require('./games')
+const GamesModel = require('./games')
+const SystemsModel = require('./systems')
 const allConfigs = require('../configs/sequelize')
-const systemsModel = require('./systems')
 
 const environment = process.env.NODE_ENV || 'development'
 const config = allConfigs[environment]
@@ -10,14 +10,14 @@ const connection = new Sequelize(config.database, config.username, config.passwo
   host: config.host, dialect: config.dialect
 })
 
-const systems = systemsModel(connection, Sequelize)
-const games = gamesModel(connection, Sequelize, systems)
+const Systems = SystemsModel(connection, Sequelize)
+const Games = GamesModel(connection, Sequelize, Systems)
 
-games.belongsTo(systems)
-systems.hasMany(games)
+Games.belongsTo(Systems)
+Systems.hasMany(Games)
 
 module.exports = {
-  games,
-  systems,
+  Games,
+  Systems,
   Op: Sequelize.Op
 }

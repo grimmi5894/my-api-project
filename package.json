@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js",
+    "dev": "env-cmd nodemon index.js",
     "dev:migrate": "env-cmd sequelize db:migrate --env development --config ./configs/sequelize.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npm run lint:pug && npm run lint:eslint",

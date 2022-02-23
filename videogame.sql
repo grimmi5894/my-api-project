@@ -8,25 +8,25 @@ USE videogames;
 
 CREATE TABLE systems (
   id INT auto_increment,
-  gameSystem VARCHAR(255), NOT NULL,
+  gameSystem VARCHAR(255) NOT NULL,
   createdAt DATETIME DEFAULT NOW(),
   updatedAt DATETIME DEFAULT NOW() ON UPDATE NOW(),
   deletedAt DATETIME,
-  PRIMARY KEY(id),
+  PRIMARY KEY(id)
 );
 
 CREATE TABLE games (
   id INT auto_increment,
-  title VARCHAR(255), NOT NULL,
-  gameSystemId INT,
+  title VARCHAR(255) NOT NULL,
   genre VARCHAR(255) NOT NULL,
-  yearReleased INT, NOT NULL,
+  yearReleased INT NOT NULL,
   multiplayer VARCHAR(255) NOT NULL,
+  systemId INT NOT NULL,
   createdAt DATETIME DEFAULT NOW(),
   updatedAt DATETIME DEFAULT NOW() ON UPDATE NOW(),
   deletedAt DATETIME,
   PRIMARY KEY(id),
-  FOREIGN KEY(gameSystemId) REFERENCES systems(id)
+  FOREIGN KEY(systemId) REFERENCES systems(id)
 );
 
 INSERT INTO systems (gameSystem) VALUES ('Nintendo');
@@ -35,22 +35,22 @@ INSERT INTO systems (gameSystem) VALUES ('Playstation');
 INSERT INTO systems (gameSystem) VALUES ('Xbox 360');
 
 
-INSERT INTO games (title, gameSystemId, genre, yearReleased, multiplayer) VALUES ('Super Mario Bros', 1, 'action/adventure', 1985, 'yes');
-INSERT INTO games (title, gameSystemId, genre, yearReleased, multiplayer) VALUES ('Final Fantasy', 1, 'rpg', 1990, 'no');
-INSERT INTO games (title, gameSystemId, genre, yearReleased, multiplayer) VALUES ('Donkey Kong', 1, 'action/adventure', 1986, 'no');
-INSERT INTO games (title, gameSystemId, genre, yearReleased, multiplayer) VALUES ('Dr. Mario', 1, 'puzzles/strategy', 1990, 'yes');
-INSERT INTO games (title, gameSystemId, genre, yearReleased, multiplayer) VALUES ('Dragon Warrior', 1, 'rpg', 1989, 'no');
-INSERT INTO games (title, gameSystemId, genre, yearReleased, multiplayer) VALUES ('Super Mario World', 2, 'platform', 1991, 'yes');
-INSERT INTO games (title, gameSystemId, genre, yearReleased, multiplayer) VALUES ('Final Fantasy 2', 2, 'rpg', 1991, 'yes');
-INSERT INTO games (title, gameSystemId, genre, yearReleased, multiplayer) VALUES ('Monopoly', 2, 'board game', 1991, 'yes');
-INSERT INTO games (title, gameSystemId, genre, yearReleased, multiplayer) VALUES ('Kirbys Dreamland 3', 2, 'platform', 1997, 'yes');
-INSERT INTO games (title, gameSystemId, genre, yearReleased, multiplayer) VALUES ('Secret of Mana', 2, 'rpg', 1993, 'no');
-INSERT INTO games (title, gameSystemId, genre, yearReleased, multiplayer) VALUES ('Final Fantasy VII', 3, 'rpg', 1997, 'no');
-INSERT INTO games (title, gameSystemId, genre, yearReleased, multiplayer) VALUES ('Tomb Raider', 3, 'action/adventure', 1996, 'no');
-INSERT INTO games (title, gameSystemId, genre, yearReleased, multiplayer) VALUES ('Tony Hawks Pro Skater 2', 3, 'sports', 2000, 'yes');
-INSERT INTO games (title, gameSystemId, genre, yearReleased, multiplayer) VALUES ('Tekken', 3, 'fighting', 1995, 'yes');
-INSERT INTO games (title, gameSystemId, genre, yearReleased, multiplayer) VALUES ('Bioshock', 4, 'first person shooter', 2007, 'no');
-INSERT INTO games (title, gameSystemId, genre, yearReleased, multiplayer) VALUES ('Rock Band', 4, 'rhythm game', 2007, 'yes');
-INSERT INTO games (title, gameSystemId, genre, yearReleased, multiplayer) VALUES ('Burnout Revenge', 4, 'racing', 2008, 'yes');
-INSERT INTO games (title, gameSystemId, genre, yearReleased, multiplayer) VALUES ('Fable II', 4, 'rpg', 2008, 'no');
-INSERT INTO games (title, gameSystemId, genre, yearReleased, multiplayer) VALUES ('Laura Croft: Tomb Raider', 4, 'action/adventure', 2013, 'yes');
+INSERT INTO games (title, genre, yearReleased, multiplayer, systemId) VALUES ('Super Mario Bros', 'action/adventure', 1985, 'yes', 1);
+INSERT INTO games (title, genre, yearReleased, multiplayer, systemId) VALUES ('Final Fantasy', 'rpg', 1990, 'no', 1);
+INSERT INTO games (title, genre, yearReleased, multiplayer, systemId) VALUES ('Donkey Kong', 'action/adventure', 1986, 'no', 1);
+INSERT INTO games (title, genre, yearReleased, multiplayer, systemId) VALUES ('Dr. Mario', 'puzzles/strategy', 1990, 'yes', 1);
+INSERT INTO games (title, genre, yearReleased, multiplayer, systemId) VALUES ('Dragon Warrior', 'rpg', 1989, 'no', 1);
+INSERT INTO games (title, genre, yearReleased, multiplayer, systemId) VALUES ('Super Mario World', 'platform', 1991, 'yes', 2);
+INSERT INTO games (title, genre, yearReleased, multiplayer, systemId) VALUES ('Final Fantasy 2', 'rpg', 1991, 'yes', 2);
+INSERT INTO games (title, genre, yearReleased, multiplayer, systemId) VALUES ('Monopoly', 'board game', 1991, 'yes', 2);
+INSERT INTO games (title, genre, yearReleased, multiplayer, systemId) VALUES ('Kirbys Dreamland 3', 'platform', 1997, 'yes', 2);
+INSERT INTO games (title, genre, yearReleased, multiplayer, systemId) VALUES ('Secret of Mana', 'rpg', 1993, 'no', 2);
+INSERT INTO games (title, genre, yearReleased, multiplayer, systemId) VALUES ('Final Fantasy VII', 'rpg', 1997, 'no', 3);
+INSERT INTO games (title, genre, yearReleased, multiplayer, systemId) VALUES ('Tomb Raider', 'action/adventure', 1996, 'no', 3);
+INSERT INTO games (title, genre, yearReleased, multiplayer, systemId) VALUES ('Tony Hawks Pro Skater 2', 'sports', 2000, 'yes', 3);
+INSERT INTO games (title, genre, yearReleased, multiplayer, systemId) VALUES ('Tekken', 'fighting', 1995, 'yes', 3);
+INSERT INTO games (title, genre, yearReleased, multiplayer, systemId) VALUES ('Bioshock', 'first person shooter', 2007, 'no', 4);
+INSERT INTO games (title, genre, yearReleased, multiplayer, systemId) VALUES ('Rock Band', 'rhythm game', 2007, 'yes', 4);
+INSERT INTO games (title, genre, yearReleased, multiplayer, systemId) VALUES ('Burnout Revenge', 'racing', 2008, 'yes', 4);
+INSERT INTO games (title, genre, yearReleased, multiplayer, systemId) VALUES ('Fable II', 'rpg', 2008, 'no', 4);
+INSERT INTO games (title, genre, yearReleased, multiplayer, systemId) VALUES ('Laura Croft: Tomb Raider', 'action/adventure', 2013, 'yes', 4);
