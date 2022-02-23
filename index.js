@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 const express = require('express')
 const bodyParser = require('body-parser')
-const { getAllGames, getGameByIdentifier } = require('./controllers/games')
+const { getAllGames, getGameByIdentifier, saveNewGame } = require('./controllers/games')
 const getAllSystems = require('./controllers/systems')
 
 const app = express()
@@ -19,7 +19,7 @@ app.get('/games', getAllGames)
 
 app.get('/games/:identifier', getGameByIdentifier)
 
-app.post('/games', bodyParser.json(), () => {})
+app.post('/games', bodyParser.json(), saveNewGame)
 
 app.all('*', (request, response) => {
   return response.sendStatus(404)

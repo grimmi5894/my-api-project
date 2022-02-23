@@ -23,4 +23,20 @@ const getGameByIdentifier = async (request, response) => {
     : response.sendStatus(404)
 }
 
-module.exports = { getAllGames, getGameByIdentifier }
+const saveNewGame = async (request, response) => {
+  const {
+    title, genre, yearReleased, multiplayer, systemId
+  } = request.body
+
+  if (!title || !genre || !yearReleased || !multiplayer || !systemId) {
+    return response.status(400).send('The following parameters are required: ')
+  }
+
+  const newGame = await models.Games.create({
+    title, genre, yearReleased, multiplayer, systemId
+  })
+
+  return response.status(201).send(newGame)
+}
+
+module.exports = { getAllGames, getGameByIdentifier, saveNewGame }
