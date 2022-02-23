@@ -29,7 +29,7 @@ const saveNewGame = async (request, response) => {
   } = request.body
 
   if (!title || !genre || !yearReleased || !multiplayer || !systemId) {
-    return response.status(400).send('The following parameters are required: ')
+    return response.status(400).send('All fields are required: title, genre, yearReleased, multiplayer, systemId')
   }
 
   const newGame = await models.Games.create({
