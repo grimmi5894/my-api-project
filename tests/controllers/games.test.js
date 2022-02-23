@@ -60,4 +60,26 @@ describe('Controllers-Games', () => {
       expect(stubbedSend).to.have.been.calledWith(mockGamesList)
     })
   })
+  describe('getGameByIdentifier', () => {
+    it('retrieves game associated with identifier from database and returns JSON using response.send()', async () => {
+      stubbedFindAll.returns(mockGame)
+      const request = { params: { identifier: 'Final Fantasy 2' } }
+      const { identifier } = request.params
+
+      await getGameByIdentifier(request, response)
+
+      expect(stubbedFindAll).to.have.been.calledWith({
+        where: {
+          [models.Op.or]: [
+            { id: { [models.Op.like]: `%${identifier}%` } },
+            { title: { [models.Op.like]: `%${identifier}%` } },
+            { genre: { [models.Op.like]: `%${identifier}%` } },
+            { systemId: { [models.Op.like]: `%${identifier}%` } }]
+        },
+        include: [{ model: models.Systems }]
+      })
+      expect(stubbedSend).to.have.been.calledWith(mockGame)
+    })
+  })
+  describe('saveNewGame', () => {})
 })
