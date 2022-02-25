@@ -59,6 +59,15 @@ describe('Controllers-Games', () => {
       expect(stubbedFindAll).to.have.callCount(1)
       expect(stubbedSend).to.have.been.calledWith(mockGamesList)
     })
+    it('responds with 500 status and error message when database call throws error', async () => {
+      stubbedFindAll.throws('ERROR')
+
+      await getAllGames({}, response)
+
+      expect(stubbedFindAll).to.have.callCount(1)
+      expect(stubbedStatus).to.have.been.calledWith(500)
+      expect(stubbedStatusDotSend).to.have.been.calledWith('Unable to retrieve games, please try again')
+    })
   })
   describe('getGameByIdentifier', () => {
     it('retrieves game associated with identifier from database and returns JSON using response.send()', async () => {
@@ -79,6 +88,26 @@ describe('Controllers-Games', () => {
         include: [{ model: models.Systems }]
       })
       expect(stubbedSend).to.have.been.calledWith(mockGame)
+    })
+    it('responds with 500 status and error message when database call throws error', async () => {
+      stubbedFindAll.throws('ERROR')
+      const request = { params: { identifier: 'error' } }
+      const { identifier } = request.params
+
+      await getGameByIdentifier(request, response)
+
+      expect(stubbedFindAll).to.have.been.calledWith({
+        where: {
+          [models.Op.or]: [
+            { id: { [models.Op.like]: `%${identifier}%` } },
+            { title: { [models.Op.like]: `%${identifier}%` } },
+            { genre: { [models.Op.like]: `%${identifier}%` } },
+            { systemId: { [models.Op.like]: `%${identifier}%` } }]
+        },
+        include: [{ model: models.Systems }]
+      })
+      expect(stubbedStatus).to.have.been.calledWith(500)
+      expect(stubbedStatusDotSend).to.have.been.calledWith('Unable to retrieve game(s), please try again')
     })
   })
   describe('saveNewGame', () => {
@@ -107,6 +136,16 @@ describe('Controllers-Games', () => {
       expect(stubbedStatus).to.have.been.calledWith(400)
       // eslint-disable-next-line max-len
       expect(stubbedStatusDotSend).to.have.been.calledWith('All fields are required: title, genre, yearReleased, multiplayer, systemId')
+    })
+    it('responds with 500 status and error message when database call throws error', async () => {
+      stubbedCreate.throws('ERROR')
+      const request = { body: mockPostGameData }
+
+      await saveNewGame(request, response)
+
+      expect(stubbedCreate).to.have.been.calledWith(mockPostGameData)
+      expect(stubbedStatus).to.have.been.calledWith(500)
+      expect(stubbedStatusDotSend).to.have.been.calledWith('Unable to save new game, please try again')
     })
   })
 })
