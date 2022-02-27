@@ -2,7 +2,7 @@ import React from 'react'
 
 const Title = () => {
   return (
-    <div>
+    <div className='Title'>
       <h1>Video Games</h1>
     </div>
   )
