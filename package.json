@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "env-cmd nodemon index.js",
+    "dev:server": "npm run dev:client:build && env-cmd nodemon index.js",
+    "dev:client": "cd client && npm start",
+    "dev:client:build": "cd client && npm run build",
+    "dev": "concurrently \"npm:dev:server\" \"npm:dev:client\"",
     "dev:migrate": "env-cmd sequelize db:migrate --env development --config ./configs/sequelize.js",
     "test": "mocha tests/**/*.test.js",
     "lint": "npm run lint:pug && npm run lint:eslint",
@@ -24,6 +27,7 @@
   "homepage": "https://github.com/grimmi5894/my-api-project#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "mysql2": "^2.3.3",
     "pug": "^3.0.2",
@@ -32,6 +36,7 @@
   },
   "devDependencies": {
     "chai": "^4.3.6",
+    "concurrently": "^7.0.0",
     "env-cmd": "^10.1.0",
     "eslint": "^8.4.0",
     "mocha": "^9.2.0",
