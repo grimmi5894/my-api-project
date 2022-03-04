@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+// import GameInfo from './filteredGamesInfo'
+
 
 const Search = () => {
-  const [searchTerm, setSearchTerm] = useState('')
   const [games, setGames] = useState([])
-  const [filteredGames, setFilteredGames] = useState([])
+  const [game, setGame] = useState([{title: '',
+    genre: '',
+    yearReleased: 0,
+    multiplayer: ''}])
 
   useEffect(() => {
     fetchGames()
@@ -15,25 +19,23 @@ const Search = () => {
     console.log(data)
     setGames(data)
   }
-
-  useEffect(() => {
-    const searchedGames = games.filter(game => game.title.includes(searchTerm))
-    setFilteredGames(searchedGames)
-  }, [games, searchTerm])
+  console.log(game)
 
   return (
-    <div className='searchBoxAndResults'>
-      <input
-        type='text'
-        onChange={(event) => setSearchTerm(event.target.value)}
-    />
+    <div>
       {
-        filteredGames.map(game => {
+        games.map(game => {
           return (
-            <div><h2>{game.title + ' / ' + game.genre}</h2></div>
+            <div>
+              <button className='button' key={game.title} onClick={(event) => {
+                setGame(event.target.value)
+                alert(game.title + '\n' + game.genre + '\n' + game.yearReleased + '\n' + game.multiplayer)
+                }}>{game.title}</button>
+
+            </div>
           )
         })
-    }
+      }
     </div>
   )
 }
