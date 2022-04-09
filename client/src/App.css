@@ -1,0 +1,31 @@
+body {
+  background-color: black;
+}
+.App {
+  text-align: center;
+  color: blue;
+  background-color: black;
+}
+
+.Title {
+  color: blue;
+  font-weight: bold;
+  font-size: xx-large;
+}
+
+.button {
+  color: red;
+  font-style: italic;
+  font-weight: bold;
+  padding: 10px;
+  background-color: powderblue;
+}
+
+.errorPage {
+  background-color: black;
+  font-size: xx-large;
+  padding: 200px;
+  color: blue;
+  font-weight: bolder;
+  text-align: center;
+}
